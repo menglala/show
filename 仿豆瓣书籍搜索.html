@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>仿豆瓣书籍搜索</title>
+    <style>
+        .wrap {
+            margin: 20px auto;
+            width: 500px;
+        }
+
+        .nav_logo {
+            width: 120px;
+            height: 50px;
+            background: url(imgs/lg_book_a11_1.png) no-repeat;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        input {
+            height: 26px;
+            width: 320px;
+            vertical-align: top;
+        }
+
+        button {
+            background: url(imgs/nav_bk_bg.png) no-repeat 0 -40px;
+            width: 39px;
+            height: 36px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #list {
+            padding: 0
+        }
+
+        #list img {
+            width: 80px;
+            height: 100px;
+            float: left;
+        }
+
+        #list li {
+            list-style: none;
+            margin-bottom: 30px;
+            width: 435px;
+            overflow: auto;
+        }
+
+        #list a {
+            margin: 10px 0 0 30px;
+            width: 300px;
+        }
+        h2{
+            display: none;
+        }
+        #list span {
+            width: 310px;
+            margin: 20px 0 0 30px;
+            font: normal 12px "";
+            color: #716262;
+        }
+
+        #list a,
+        #list span {
+            display: inline-block;
+        }
+    </style>
+    <script>
+        //预先定义一个回调函数
+        function callback(data) {
+            var oH2 = document.getElementsByTagName('h2')[0];
+            var oUl = document.getElementById('list');
+
+            if (data.books.length) {
+                oH2.style.display = 'block';
+                oUl.innerHTML='';
+                for (let i = 0; i < data.books.length; i++) {
+                    var oLi = document.createElement('li');
+                    var oImg = document.createElement('img');
+                    var oTitle = document.createElement('a');
+                    var oSpan = document.createElement('span');
+
+                    oImg.src = data.books[i].image;
+                    oTitle.innerHTML = data.books[i].title;
+                    oTitle.href=data.books[i].url;
+                    oSpan.innerHTML = data.books[i].author_intro;
+
+                    oLi.appendChild(oImg);
+                    oLi.appendChild(oTitle);
+                    oLi.appendChild(oSpan);
+
+                    oUl.appendChild(oLi);
+                }
+
+            }
+
+        }
+
+        window.onload = function () {
+            var search = document.getElementById('search'),
+                oBtn = document.getElementsByTagName('button')[0],
+                oUl = document.getElementById('list');
+
+            oBtn.onclick = function () {
+                var oScript = document.createElement('script');
+                oScript.src = 'https://api.douban.com/v2/book/search?q=' + search.value + '&callback=callback';
+
+                document.body.appendChild(oScript);
+
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="nav_logo">
+            <a href="https://book.douban.com/"> . </a>
+        </div>
+        <input type="text" id="search" placeholder="书名,作者ISBN">
+        <button>.</button>
+        <div class="content">
+            <h2>搜索结果</h2>
+            <ul id="list">
+                <!-- <li>
+                    <img src="imgs/海上帝国.PNG" alt="photos">
+                    <a href="#">JavaScript高级程序设计</a>
+                    <span>Nicholas C.Zakas / 丁琛 / 赵泽欣 / 电子工业出版社 / 2010-11 / 49.00元</span>
+                </li> -->
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
