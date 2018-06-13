@@ -6,5 +6,4 @@ http://htmlpreview.github.io/?https://github.com/menglala/show/blob/master/%E6%B
 http://htmlpreview.github.io/?https://github.com/menglala/show/blob/master/%E4%BB%BF%E8%B1%86%E7%93%A3%E4%B9%A6%E7%B1%8D%E6%90%9C%E7%B4%A2.html
 
 用原生实现的类似的淘宝轮播图：
-http://htmlpreview.github.io/
-https://github.com/menglala/show/blob/master/%E5%9B%BE%E7%89%87%E8%87%AA%E5%8A%A8%E8%BD%AE%E6%92%AD.html
+http://htmlpreview.github.io/?https://github.com/menglala/show/blob/master/%E5%9B%BE%E7%89%87%E8%87%AA%E5%8A%A8%E8%BD%AE%E6%92%AD.html
