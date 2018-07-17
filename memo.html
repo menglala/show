@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>备忘录</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/axios/dist/axios.js"></script>
+    <style>
+        .cancel {
+            text-decoration: line-through;
+            color: rgb(209, 209, 209);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        便签列表
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row  col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">还有 {{amount}} 件事未完成</div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" @keyup.enter="add" v-model="title">
+
+                    </div>
+
+                    <!-- List group -->
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="(matter,index) in filterList">
+                            <input type="checkbox" v-model="matter.isSelect">
+                            <span v-show="cur!==matter" @dblclick="tab(matter)" :class="{cancel:matter.isSelect}">{{matter.title}}</span>
+                            <input type="text" v-show="cur===matter" @keyup.enter="cancel" v-model="matter.title" v-focus>
+                            <button class="btn btn-danger pull-right btn-xs" @click="remove(matter)">&times;</button>
+                            <div class="clearfix"></div>
+                        </li>
+
+                    </ul>
+                    <div class="panel-footer">
+                        <ul class="nav nav-pills">
+                            <li role="presentation" :class="{active:hash==='all'}">
+                                <a href="#/all">全部</a>
+                            </li>
+                            <li role="presentation" :class="{active:hash==='finished'}">
+                                <a href="#/finished">已完成</a>
+                            </li>
+                            <li role="presentation" :class="{active:hash==='unfinished'}">
+                                <a href="#/unfinished">未完成</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="scripts/memo.js"></script>
+</html>
